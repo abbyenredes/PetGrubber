@@ -1,2 +1,2 @@
-# TechHunter
-Cazando las mejores ofertas en tecnología 🎯
+# PetGrubber
+rastrea y "escarba" las mejores opciones 🦴
