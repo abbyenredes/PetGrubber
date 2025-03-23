@@ -15,7 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # configuracion de navegador
 def main():
     browser = uc.Chrome()
-    url = 'https://www.tiendanimal.es/flamingo-sticks-de-madera-para-roer-/FLA7370_M.html'
+    url = 'https://www.tiendanimal.es/buscador?q=heno&start=48&page={}'
     browser.get(url)
     browser.implicitly_wait(10)
     # automatizacion para aceptar cookies
