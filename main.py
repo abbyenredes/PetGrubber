@@ -15,7 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # configuracion de navegador
 def main():
     browser = uc.Chrome()
-    url = 'https://www.tiendanimal.es/flamingo-sticks-de-madera-para-roer-/FLA7370_M.html'
+    url = 'https://www.tiendanimal.es/home-friends-heno-de-manzanilla-para-roedores/HOMCOM308050_M.html'
     browser.get(url)
     browser.implicitly_wait(10)
     # automatizacion para aceptar cookies
@@ -33,20 +33,15 @@ def main():
     product_name = soup.find('h1', class_='product-page-title-block__title').text
     print(product_name)
 
+    product_brand = soup.find('a', class_='isk-link is-small product-page-title-block__brand').text
+    print(product_brand)
+    
     product_price = soup.find('span', class_='product-page-action__price').text
     print(product_price)
-    
-    product_description = soup.find('div', class_='product-page-details__content is-long').text
-    print(product_description)
     
     product_rating = soup.find('div', class_='product-page-title-block__rating').text
     print(product_rating)
     
-    ''''
-    product_stars = soup.find('div', class_='product-page-title-block__stars').text
-    print(product_stars)
-    '''
-
 
 if __name__ == '__main__':
     main()
