@@ -2,6 +2,9 @@
 rastrea y "escarba" las mejores opciones 🦴
  # Acerca del proyecto:
 
+## Mis recursos
+* Tienda demo para practicar selenium [saucedemo](https://www.saucedemo.com/)
+* Libreria demo para practicar webscraping [books.toscrape](https://books.toscrape.com/)
 
 ## Como usar PetGrubber
 > [!WARNING]
