@@ -1,47 +1,67 @@
-import requests
 from bs4 import BeautifulSoup as bs
-import random
-import time
 import pandas as pd
-import numpy as np
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
-# configuracion de navegador
-def main():
+def scrape_product(url):
+    # Configuración del navegador
     browser = uc.Chrome()
-    url = 'https://www.tiendanimal.es/home-friends-heno-de-manzanilla-para-roedores/HOMCOM308050_M.html'
     browser.get(url)
-    browser.implicitly_wait(10)
-    # automatizacion para aceptar cookies
-    cookie_button = WebDriverWait(browser, 10).until(
-    EC.element_to_be_clickable((By.XPATH, '//*[@id="onetrust-accept-btn-handler"]')))
-    cookie_button.click()
+    
+    try:
+        # Aceptar cookies de forma automatizada
+        WebDriverWait(browser, 10).until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="onetrust-accept-btn-handler"]'))
+        ).click()
+    except Exception as e:
+        print("No se encontró el botón de cookies o ya estaba aceptado.")
+    
+    # Parcear el HTML
     html = browser.page_source
     soup = bs(html, 'lxml')
-    soup
-    # browser.close() # cerrar pestaña
-    input("Presiona Enter para cerrar el navegador...")
-    browser.quit() # cerrar navegador
     
-    # extraccion de datos
-    product_name = soup.find('h1', class_='product-page-title-block__title').text
-    print(product_name)
 
-    product_brand = soup.find('a', class_='isk-link is-small product-page-title-block__brand').text
-    print(product_brand)
+    browser.quit() # Cerrar el navegador
     
-    product_price = soup.find('span', class_='product-page-action__price').text
-    print(product_price)
+    # Extraer datos con manejo de errores
+    try:
+        product_name = soup.find('h1', class_='product-page-title-block__title').text.strip()
+    except:
+        product_name = 'No disponible'
     
-    product_rating = soup.find('div', class_='product-page-title-block__rating').text
-    print(product_rating)
+    try:
+        product_brand = soup.find('a', class_='isk-link is-small product-page-title-block__brand').text.strip()
+    except:
+        product_brand = 'No disponible'
     
+    try:
+        product_price = soup.find('span', class_='product-page-action__price').text.strip()
+        product_price = product_price.replace('€', '').replace(',', '.').strip()
+    except:
+        product_price = 'No disponible'
+    
+    try:
+        product_rating = soup.find('div', class_='product-page-title-block__rating').text.strip()
+    except:
+        product_rating = 'No disponible'
+    
+    return {
+        'Nombre': product_name,
+        'Marca': product_brand,
+        'Precio (€)': product_price,
+        'Valoración': product_rating
+    }
+
+def main():
+    url = 'https://www.tiendanimal.es/jr-farm-pelota-de-sause-con-heno-para-roedores/JRFJR07709_M.html'
+    data = scrape_product(url)
+    
+    # Guardar datos en un DataFrame de Pandas con formato limpio
+    df = pd.DataFrame([data])
+    df.to_csv('productos.csv', index=False, sep=';', encoding='utf-8')
+    print("Datos guardados en productos.csv con exito!")
 
 if __name__ == '__main__':
     main()
