@@ -132,6 +132,7 @@ PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv)
 ❯ python3.10 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
 <html></html>
 ```
+
 Pactique un poco con esta página: [books.toscrape](https://books.toscrape.com/) ya que no queria ser baneada por parecer un bot. En esta mi misión era aprender a hacer scrapping por puntuacion y solo descargar los libros con la mejor puntuación, esta es mi práctica:
 
 ```python
@@ -164,8 +165,70 @@ for pagina in range(1, 51):
 for t in titulos_rating_alto:
     print(t)
 ```
+Información útil sobre BeautifulSoup:
+| Método                        | Descripción                                                                               | Ejemplo                                                               |
+|--------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `find(name, attrs)`           | Encuentra el primer elemento que coincide con la etiqueta y atributos dados.              | `soup.find('div', class_='contenido')`                                |
+| `find_all(name, attrs)`       | Encuentra todos los elementos que coinciden con la etiqueta y atributos dados.            | `soup.find_all('p', class_='texto')`                                  |
+| `select(css_selector)`        | Encuentra elementos usando selectores CSS.                                                | `soup.select('div#id_contenedor p.texto')`                            |
+| `get_text()`                  | Extrae el texto de un elemento, eliminando etiquetas HTML.                                | `elemento.get_text()`                                                 |
+| `get(attribute)`              | Obtiene el valor de un atributo de un elemento.                                           | `elemento.get('href')`                                                |
+| `parent`                      | Obtiene el elemento padre del elemento actual.                                            | `elemento.parent`                                                     |
+| `find_parent(name, attrs)`    | Encuentra el primer elemento padre que coincide con el nombre y atributos dados.          | `elemento.find_parent('div')`                                         |
+| `find_parents(name, attrs)`   | Encuentra todos los elementos padres que coinciden con el nombre y atributos dados.       | `elemento.find_parents('div')`                                        |
+| `children`                    | Retorna los elementos hijos directos de un elemento.                                      | `for hijo in elemento.children:`                                      |
+| `descendants`                 | Retorna todos los elementos descendientes de un elemento.                                | `for descendiente in elemento.descendants:`                          |
+| `next_sibling`                | Obtiene el siguiente elemento en el mismo nivel.                                         | `elemento.next_sibling`                                               |
+| `previous_sibling`            | Obtiene el elemento anterior en el mismo nivel.                                          | `elemento.previous_sibling`                                           |
+| `decompose()`                 | Elimina un elemento del árbol de BeautifulSoup.                                          | `elemento.decompose()`                                                |
+| `replace_with(nuevo_elemento)`| Reemplaza un elemento con otro.                                                           | `elemento.replace_with('Nuevo contenido')`                            |
+| `prettify()`                  | Devuelve el HTML estructurado y bien formateado.                                         | `print(soup.prettify())`                                              |
 
-Con esta base implemnte mi primera versión pero me tope con varios inconvenientes que me hicieron elegir usar **Selenium** y el primero fue el manejo de cookies y una implementación  para no ser baneado facilmente de las páginas.
+> [!NOTE]
+> Para este proyecto use los métodos:
+> 
+> `bs(html, 'lxml')` para analizar el HTML de la página y extraer datos.
+> 
+> `soup.find('div', class_='contenido')` para extraer las distintas etiquetas HTML.
+
+Con esta base implemente mi primera versión pero me tope con varios inconvenientes que me hicieron elegir usar **Selenium** y el primero fue el manejo de cookies y una implementación para no ser baneado facilmente de las páginas. Aparte que la página que queria scrappear es dinamica.
+Aquí los diferentes métodos que tiene:
+
+| Método                     | Descripción                                                                 | Ejemplo                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `get(url)`                 | Abre una página web en el navegador.                                        | `driver.get('https://example.com')`                                    |
+| `find_element()`           | Encuentra un elemento en la página usando un selector.                     | `driver.find_element(By.ID, 'elemento_id')`                            |
+| `find_elements()`          | Encuentra múltiples elementos en la página.                                | `driver.find_elements(By.CLASS_NAME, 'clase_elemento')`                |
+| `click()`                  | Hace clic en un elemento.                                                   | `elemento.click()`                                                     |
+| `send_keys(texto)`         | Escribe texto en un campo de entrada.                                       | `elemento.send_keys('Hola mundo')`                                     |
+| `clear()`                  | Borra el contenido de un campo de entrada.                                 | `elemento.clear()`                                                     |
+| `submit()`                 | Envía un formulario.                                                        | `elemento.submit()`                                                    |
+| `get_attribute(nombre)`    | Obtiene el valor de un atributo del elemento.                              | `elemento.get_attribute('href')`                                       |
+| `is_displayed()`           | Verifica si un elemento es visible.                                        | `elemento.is_displayed()`                                              |
+| `is_enabled()`             | Verifica si un elemento está habilitado.                                   | `elemento.is_enabled()`                                                |
+| `is_selected()`            | Verifica si un checkbox o radio está seleccionado.                        | `elemento.is_selected()`                                               |
+| `execute_script(script)`   | Ejecuta código JavaScript en la página.                                   | `driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")` |
+| `switch_to.frame(frame)`   | Cambia a un iframe en la página.                                          | `driver.switch_to.frame('nombre_iframe')`                              |
+| `switch_to.default_content()` | Sale del iframe y vuelve al contenido principal.                    | `driver.switch_to.default_content()`                                   |
+| `implicitly_wait(segundos)` | Espera implícita antes de que falle una búsqueda de elemento.          | `driver.implicitly_wait(10)`                                           |
+| `WebDriverWait(driver, tiempo).until()` | Espera hasta que una condición se cumpla.                 | `WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'elemento_id')))` |
+| `back()`                   | Navega a la página anterior en el historial.                              | `driver.back()`                                                        |
+| `forward()`                | Navega a la página siguiente en el historial.                             | `driver.forward()`                                                     |
+| `refresh()`                | Recarga la página actual.                                                  | `driver.refresh()`                                                     |
+| `close()`                  | Cierra la pestaña actual del navegador.                                   | `driver.close()`                                                       |
+| `quit()`                   | Cierra completamente el navegador.                                        | `driver.quit()`                                                        |
+> [!NOTE]
+> Aquí los métodos que use yo:
+>
+> `undetected_chromedriver.Chrome()` para iniciar un navegador y evitar bloqueos por detección de bots.
+>
+> `browser.get(url)`  para abir la página web dada.
+>
+> `WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="onetrust-accept-btn-handler"]'))).click()` y mi favorito ya que espera hasta que aparezca el botón de cookies y hace clic en él.
+>
+> `browser.page_source` para obtener el código HTML de la página.
+>
+> `browser.quit()` para Cerrar el navegador cuando termina el scraping.
 
 5️⃣ Guardado de esos datos
 
