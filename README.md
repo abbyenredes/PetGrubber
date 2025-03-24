@@ -96,7 +96,7 @@ python3 main.py
 
 ### 6️⃣ Disfruta del resultado
 
-![video_demo]()
+![video_demo](https://github.com/abbyenredes/PetGrubber/blob/main/img/scraper.gif)
 
 ### Mi paso a paso
 
@@ -114,7 +114,7 @@ Según mi experiencia como asistente veterinario y tutora de mascotas, los datos
 
 3️⃣ Examinar donde estan esos datos y para ello use la opcion de inspeccionar página.
 
-![video-inspeccionar]()
+![video-inspeccionar](https://github.com/abbyenredes/PetGrubber/blob/main/img/inspeccionar.gif)
 
 4️⃣ Definir que biblioteca de websrappping usar.
 
