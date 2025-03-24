@@ -97,4 +97,38 @@ PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv)
 ❯ python3 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
 Segmentation fault (core dumped)
 ```
-Después de investigar y probar que habia descargado correctamente
+Después de investigar y probar que habia descargado correctamente, borrar y volver a crear mi entorno visual di que era por mi version de python. Mi solucion:
+
+Borrar nuevamente mi entorno virtual:
+```textplain
+rm -rf .venv
+```
+instalarlo con python3.10
+```textplain
+python3.10 -m venv .venv
+```
+Descargar mis dependencias
+```textplain
+pip install beautifulsoup4 lxml requests
+```
+✔️ probar lo que llevaba de script
+
+¿Por qué con esta versión y no con otra?
+pues probe desde 3.12, 3.11 y solo con la 3.10 funciono.
+
+```shell
+PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv) 
+❯ python3.12 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
+Command 'python3.12' not found, did you mean:
+  command 'python3.10' from deb python3.10 (3.10.12-1~22.04.9)
+  command 'python3.11' from deb python3.11 (3.11.0~rc1-1~22.04)
+Try: sudo apt install <deb name>
+```
+Con esta version **BeautifulSoup** es estable y compatible
+
+```shell
+PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv) 
+❯ python3.10 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
+<html></html>
+```
+Pactique un poco con esta página ya que no queria ser baneada por parecer un bot.
