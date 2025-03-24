@@ -7,10 +7,11 @@ El webscrapper que todo amante de los animales debe conocer 🦴
  Esta herramienta es para ti, optimiza esa busqueda con un solo click, enseñandote los productos con mejor valoración y permitiendote elegir lo mejor para tu compañero peludo. 
  
 ## Mis recursos
-* Tienda demo para practicar selenium [saucedemo](https://www.saucedemo.com/)
-* Libreria demo para practicar webscraping 
-* Video del que saque la logica de selenium [Webscrapping idealista](https://www.youtube.com/watch?v=JKwfzexrQS0&ab_channel=JaviDataScience)
-* 
+* Tienda demo para practicar selenium: [saucedemo](https://www.saucedemo.com/)
+* Libreria demo para practicar webscraping:  [books.toscrape](https://books.toscrape.com/)
+* Video del que saque la logica de selenium: [Webscrapping idealista](https://www.youtube.com/watch?v=JKwfzexrQS0&ab_channel=JaviDataScience)
+* Tutorial de pandas: [pandas](https://www.datacamp.com/es/tutorial/pandas)
+* Guia sobre webscrepping: [La guía definitiva para Web Scraping](https://www.rapidseedbox.com/es/blog/web-scraping)
 
 ## Como usar PetGrubber
 > [!WARNING]
@@ -168,4 +169,29 @@ Con esta base implemnte mi primera versión pero me tope con varios inconvenient
 
 5️⃣ Guardado de esos datos
 
+Al principio necesitaba ver que los datos extraidos eran los correctos y use la función `printf`, sin embargo eso no es lo óptimo probe con json pero la verdad esteticamente no me gusto y por ello elegí Pandas ya que me exporta los datos en un documento cvs de una forma dinamica.
+aqui dejo un resumen de sus distintos módulos:
+
+| Método               | Descripción                                                                                      | Ejemplo                                                                                           |
+|----------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `read_csv()`         | Importa datos desde un archivo CSV a un DataFrame.                                               | `df = pd.read_csv('datos.csv')`                                                                   |
+| `head()`             | Muestra las primeras n filas del DataFrame (por defecto, n=5).                                   | `df.head()`                                                                                       |
+| `tail()`             | Muestra las últimas n filas del DataFrame (por defecto, n=5).                                    | `df.tail()`                                                                                       |
+| `info()`             | Proporciona un resumen conciso del DataFrame, incluyendo el número de entradas y tipos de datos. | `df.info()`                                                                                       |
+| `describe()`         | Genera estadísticas descriptivas para las columnas numéricas del DataFrame.                      | `df.describe()`                                                                                   |
+| `sort_values()`      | Ordena el DataFrame según los valores de una o más columnas.                                     | `df.sort_values(by='columna', ascending=True)`                                                    |
+| `groupby()`          | Agrupa el DataFrame utilizando una o más columnas y permite aplicar funciones de agregación.     | `df.groupby('columna').mean()`                                                                    |
+| `drop_duplicates()`  | Elimina filas duplicadas del DataFrame.                                                          | `df.drop_duplicates()`                                                                            |
+| `rename()`           | Cambia el nombre de las columnas o filas del DataFrame.                                          | `df.rename(columns={'viejo_nombre': 'nuevo_nombre'})`                                             |
+| `value_counts()`     | Cuenta la cantidad de ocurrencias únicas de valores en una serie o columna.                      | `df['columna'].value_counts()`                                                                    |
+| `merge()`            | Combina dos DataFrames basándose en una clave común.                                             | `pd.merge(df1, df2, on='columna_clave')`                                                          |
+| `pivot_table()`      | Crea una tabla dinámica que resume los datos según las variables especificadas.                  | `df.pivot_table(values='columna_valor', index='columna_indice', columns='columna_columnas')`      |
+| `fillna()`           | Rellena los valores NaN (nulos) con un valor específico.                                         | `df.fillna(valor=0)`                                                                              |
+| `dropna()`           | Elimina las filas o columnas que contienen valores nulos.                                        | `df.dropna()`                                                                                     |
+| `apply()`            | Aplica una función a lo largo de un eje del DataFrame (filas o columnas).                        | `df['columna'].apply(funcion)`                                                                    |
+| `astype()`           | Convierte el tipo de datos de una o más columnas.                                                | `df['columna'] = df['columna'].astype(int)`                                                       |
+| `set_index()`        | Establece una columna específica como el índice del DataFrame.                                   | `df.set_index('columna')`                                                                         |
+| `reset_index()`      | Restablece el índice del DataFrame al valor predeterminado.                                      | `df.reset_index()`                                                                                |
+| `loc[]`              | Accede a un grupo de filas y columnas por etiquetas o una matriz booleana.                       | `df.loc[filas, columnas]`                                                                         |
+| `iloc[]`             | Accede a un grupo de filas y columnas por índices enteros.                                       | `df.iloc[filas, columnas]`                                                                        |
 
