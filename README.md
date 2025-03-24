@@ -299,10 +299,6 @@ aqui dejo un resumen de sus distintos módulos:
 >
 > `df.to_csv('productos.csv', index=False, sep=';', encoding='utf-8')` para guardar los datos en un archivo CSV.
 
-6️⃣ Implemente una bateria de test
-
-![test]()
-
 ---
 
 ## 🤝 Contribución  
