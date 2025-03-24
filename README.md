@@ -48,6 +48,7 @@ El webscrapper que todo amante de los animales debe conocer 🦴
 * Guia sobre webscrepping: [La guía definitiva para Web Scraping](https://www.rapidseedbox.com/es/blog/web-scraping)
 
 ## Como usar PetGrubber
+
 > [!WARNING]
 > este programa esta creado con la version de python3.10
 
@@ -56,8 +57,8 @@ El webscrapper que todo amante de los animales debe conocer 🦴
 ### 1️⃣ Clonar el repositorio y entrar
 
 ```textplain
-git clone https://github.com/tu-API
-cd tu-API
+git clone hhttps://github.com/abbyenredes/PetGrubber.git
+cd PetGrubber
 ```
 
 ### 2️⃣ Descarga el entorno virtual:
