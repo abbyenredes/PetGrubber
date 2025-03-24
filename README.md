@@ -2,7 +2,9 @@
 El webscrapper que todo amante de los animales debe conocer 🦴
  ## Acerca del proyecto:
  
- 🚧 En construcción 🚧
+ ¿Cansado de pasar horas buscando los mejores productos para tu mascota?
+
+ Esta herramienta es para ti, optimiza esa busqueda con un solo click, enseñandote los productos con mejor valoración y permitiendote elegir lo mejor para tu compañero peludo. 
  
 ## Mis recursos
 * Tienda demo para practicar selenium [saucedemo](https://www.saucedemo.com/)
@@ -68,15 +70,18 @@ python3 main.py
 Primero pense en que datos gustaría scrappear, me gusta el mundo de los animales así que me parecio una gran oportunidad aportar valor y una de mis metas fue [tiendanimal](https://www.tiendanimal.es/), visualice su [robots.txt](https://www.tiendanimal.es/robots.txt) y me di cuenta que todo en su **User-agent** estaba en **Disallow** lo que significa que esta página no desea ser scrappeada. Son pocas las páginas que realmente lo permitan pero eso no me freno a continuar.
 
 2️⃣ Definiendo los datos:
-Según mi experiencia como asistente veterinario y tutora de mascotas, los datos revelantes para extraer en esta tienda es:
+Según mi experiencia como asistente veterinario y tutora de mascotas, los datos revelantes para extraer en esta tienda son:
 
 * Nombre del producto
 * Marca
 * Precio
 * Calificación (este para mi es un dato muy importante, quiero darle calidad de vida a mis mascotas sin importar si es mas costoso)
 
+3️⃣ Examinar donde estan esos datos y para ello use la opcion de inspeccionar página.
 
-3️⃣ Definir que biblioteca de websrappping usar.
+![video-inspeccionar]()
+
+4️⃣ Definir que biblioteca de websrappping usar.
 
 | Librería        | Descripción | Pros | Contras |
 |----------------|------------|------|---------|
@@ -85,4 +90,11 @@ Según mi experiencia como asistente veterinario y tutora de mascotas, los datos
 | **Requests**    | Librería para hacer peticiones HTTP de manera sencilla y obtener el HTML de las páginas web. | ✅ Fácil de usar, permite manejar sesiones y autenticaciones. | ❌ No parsea HTML ni interactúa con JavaScript. Se usa junto con BeautifulSoup o lxml. |
 | **Selenium**    | Automación de navegadores, permite interactuar con páginas web dinámicas. | ✅ Soporta JavaScript y páginas dinámicas, permite interactuar con formularios y botones. | ❌ Lento en comparación con Scrapy, requiere un navegador instalado. |
 
-En mi caso empece creando un script básico con 
+En mi caso empece creando un script básico con  **BeautifulSoup**  **Requests** y me encontre mi primer problema, mi versión de python no era apta para **BeautifulSoup**
+
+```shell
+PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv) 
+❯ python3 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
+Segmentation fault (core dumped)
+```
+Después de investigar y probar que habia descargado correctamente
