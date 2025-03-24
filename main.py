@@ -1,4 +1,3 @@
-from py_compile import main
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
@@ -10,7 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 def scrape_product(url):
     # Configuración del navegador
     browser = uc.Chrome()
-    url = 'https://www.tiendanimal.es/flamingo-sticks-de-madera-para-roer-/FLA7370_M.html'
     browser.get(url)
     
     try:
@@ -28,24 +26,43 @@ def scrape_product(url):
 
     browser.quit() # Cerrar el navegador
     
-    # extraccion de datos
-    product_name = soup.find('h1', class_='product-page-title-block__title').text
-    print(product_name)
+    # Extraer datos con manejo de errores
+    try:
+        product_name = soup.find('h1', class_='product-page-title-block__title').text.strip()
+    except:
+        product_name = 'No disponible'
+    
+    try:
+        product_brand = soup.find('a', class_='isk-link is-small product-page-title-block__brand').text.strip()
+    except:
+        product_brand = 'No disponible'
+    
+    try:
+        product_price = soup.find('span', class_='product-page-action__price').text.strip()
+        product_price = product_price.replace('€', '').replace(',', '.').strip()
+    except:
+        product_price = 'No disponible'
+    
+    try:
+        product_rating = soup.find('div', class_='product-page-title-block__rating').text.strip()
+    except:
+        product_rating = 'No disponible'
+    
+    return {
+        'Nombre': product_name,
+        'Marca': product_brand,
+        'Precio (€)': product_price,
+        'Valoración': product_rating
+    }
 
-    product_price = soup.find('span', class_='product-page-action__price').text
-    print(product_price)
+def main():
+    url = 'https://www.tiendanimal.es/jr-farm-pelota-de-sause-con-heno-para-roedores/JRFJR07709_M.html'
+    data = scrape_product(url)
     
-    product_description = soup.find('div', class_='product-page-details__content is-long').text
-    print(product_description)
-    
-    product_rating = soup.find('div', class_='product-page-title-block__rating').text
-    print(product_rating)
-    
-    ''''
-    product_stars = soup.find('div', class_='product-page-title-block__stars').text
-    print(product_stars)
-    '''
-
+    # Guardar datos en un DataFrame de Pandas con formato limpio
+    df = pd.DataFrame([data])
+    df.to_csv('productos.csv', index=False, sep=';', encoding='utf-8')
+    print("Datos guardados en productos.csv con exito!")
 
 if __name__ == '__main__':
     main()
