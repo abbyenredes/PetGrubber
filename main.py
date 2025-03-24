@@ -1,4 +1,3 @@
-import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 import undetected_chromedriver as uc
@@ -17,7 +16,7 @@ def scrape_product(url):
             EC.element_to_be_clickable((By.XPATH, '//*[@id="onetrust-accept-btn-handler"]'))
         ).click()
     except Exception as e:
-        print("No se encontró botón de cookies o ya estaba aceptado.")
+        print("No se encontró el botón de cookies o ya estaba aceptado.")
     
     # Parcear el HTML
     html = browser.page_source
