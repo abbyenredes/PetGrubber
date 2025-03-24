@@ -50,3 +50,39 @@ source .venv/bin/activate
 
 > [!TIP]
 > Con `pip list` puedes visualizar todas las dependencias descargadas.
+
+### 5️⃣ Ejecuta el scrapper 
+
+```textplain
+python3 main.py
+```
+
+### Disfruta del resultado
+
+![video_demo]()
+
+### Mi paso a paso
+
+1️⃣ ¿Cual es mi finalidad?
+
+Primero pense en que datos gustaría scrappear, me gusta el mundo de los animales así que me parecio una gran oportunidad aportar valor y una de mis metas fue [tiendanimal](https://www.tiendanimal.es/), visualice su [robots.txt](https://www.tiendanimal.es/robots.txt) y me di cuenta que todo en su **User-agent** estaba en **Disallow** lo que significa que esta página no desea ser scrappeada. Son pocas las páginas que realmente lo permitan pero eso no me freno a continuar.
+
+2️⃣ Definiendo los datos:
+Según mi experiencia como asistente veterinario y tutora de mascotas, los datos revelantes para extraer en esta tienda es:
+
+* Nombre del producto
+* Marca
+* Precio
+* Calificación (este para mi es un dato muy importante, quiero darle calidad de vida a mis mascotas sin importar si es mas costoso)
+
+
+3️⃣ Definir que biblioteca de websrappping usar.
+
+| Librería        | Descripción | Pros | Contras |
+|----------------|------------|------|---------|
+| **BeautifulSoup** | Analiza y extrae datos de HTML y XML de forma sencilla. | ✅ Fácil de usar, flexible, ideal para proyectos pequeños y medianos. | ❌ No descarga páginas web, necesita `requests` o `urllib`. Lento para grandes volúmenes de datos. |
+| **Scrapy**      | Framework completo para web scraping, permite rastrear y extraer datos de múltiples páginas de manera eficiente. | ✅ Rápido, eficiente, maneja peticiones asíncronas, tiene soporte integrado para middlewares y almacenamiento de datos. | ❌ Curva de aprendizaje más alta, puede ser excesivo para tareas simples. |
+| **Requests**    | Librería para hacer peticiones HTTP de manera sencilla y obtener el HTML de las páginas web. | ✅ Fácil de usar, permite manejar sesiones y autenticaciones. | ❌ No parsea HTML ni interactúa con JavaScript. Se usa junto con BeautifulSoup o lxml. |
+| **Selenium**    | Automación de navegadores, permite interactuar con páginas web dinámicas. | ✅ Soporta JavaScript y páginas dinámicas, permite interactuar con formularios y botones. | ❌ Lento en comparación con Scrapy, requiere un navegador instalado. |
+
+En mi caso empece creando un script básico con 
