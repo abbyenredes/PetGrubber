@@ -8,7 +8,7 @@ El webscrapper que todo amante de los animales debe conocer 🦴
  
 ## Mis recursos
 * Tienda demo para practicar selenium [saucedemo](https://www.saucedemo.com/)
-* Libreria demo para practicar webscraping [books.toscrape](https://books.toscrape.com/)
+* Libreria demo para practicar webscraping 
 * Video del que saque la logica de selenium [Webscrapping idealista](https://www.youtube.com/watch?v=JKwfzexrQS0&ab_channel=JaviDataScience)
 * 
 
@@ -131,4 +131,37 @@ PetGrubber on  main [?] via 🐍 v3.13.0a3 (.venv)
 ❯ python3.10 -c "from bs4 import BeautifulSoup; print(BeautifulSoup('<html></html>', 'html.parser'))"
 <html></html>
 ```
-Pactique un poco con esta página ya que no queria ser baneada por parecer un bot.
+Pactique un poco con esta página: [books.toscrape](https://books.toscrape.com/) ya que no queria ser baneada por parecer un bot. En esta mi misión era aprender a hacer scrapping por puntuacion y solo descargar los libros con la mejor puntuación, esta es mi práctica:
+
+```python
+import bs4
+import requests
+
+url_base = 'https://books.toscrape.com/catalogue/page-{}.html'
+
+# lista de titulos con 4 o 5 estrellas
+titulos_rating_alto = []
+
+# iterar paginas
+for pagina in range(1, 51):
+
+    url_pagina = url_base.format(pagina)
+    resultado = requests.get(url_pagina)
+    sopa = bs4.BeautifulSoup(resultado.text, 'lxml')
+
+    # seleccionar datos de los libros
+    libros = sopa.select('.product_pod')
+
+    for libro in libros:
+
+        # chequear que tengan 4 o 5 estrellas
+        if len(libro.select('.star-rating.Four')) != 0 or len(libro.select('.star-rating.Five')) != 0:
+            titulo_libro = libro.select('a')[1]['title']
+            titulos_rating_alto.append(titulo_libro)
+
+# ver libros 4 u 5 estrellas en consola
+for t in titulos_rating_alto:
+    print(t)
+```
+
+Con esta base implemnte mi primera versión pero me tope con varios inconvenientes que me hicieron elegir usar **Selenium**
