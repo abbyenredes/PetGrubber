@@ -1,10 +1,44 @@
 # PetGrubber
 El webscrapper que todo amante de los animales debe conocer 🦴
- ## Acerca del proyecto:
  
- ¿Cansado de pasar horas buscando los mejores productos para tu mascota?
+<details>
+  <summary>¿Que voy a encontrarme?</summary>
+  <ol>
+    <li>
+      <a href="#¿Qué-es-PetGrubber">¿Qué es PetGrubber?</a>
+      <ul>
+        <li><a href="#Características"> Características</a></li>
+       <li><a href="#Mis-recursos">Mis recursos</a></li>
+      </ul>
+    </li>
+    <li><a href="#Como-usar-PetGrubber">Como usar PetGrubber</a></li>
+   <li><a href="#Mi-paso-a-paso">Mi paso a paso</a></li>
+     <li><a href="#Contribución">Contribución</a></li>
+  </ol>
+</details>
 
- Esta herramienta es para ti, optimiza esa busqueda con un solo click, enseñandote los productos con mejor valoración y permitiendote elegir lo mejor para tu compañero peludo. 
+## ¿Qué es PetGrubber?
+ ¿Cansado de pasar horas buscando los mejores productos para tu mascota?
+ Esta herramienta es para ti, optimiza esa busqueda con un solo click, enseñandote los productos con mejor valoración y permitiendote elegir lo mejor para tu compañero peludo.  
+
+ ## Características 
+
+1. **Automatización del Navegador**  
+   - Utiliza `undetected_chromedriver` de **Selenium** para evitar bloqueos por detección de bots y cargar páginas dinámicas correctamente.  
+   - Permite interactuar con la página, como aceptar cookies automáticamente.  
+
+2. **Extracción de Datos con BeautifulSoup**  
+   - Analiza el código HTML con `BeautifulSoup` para extraer información clave como el **nombre, marca, precio y valoración** del producto.  
+   - Implementa manejo de errores para evitar fallos si un elemento no está disponible.  
+
+3. **Almacenamiento de Datos en CSV**  
+   - Usa `pandas` para organizar los datos en un **DataFrame** y exportarlos en formato CSV (`productos.csv`).  
+   - Permite un formato estructurado y fácil de analizar para futuras consultas.  
+
+4. **Eficiencia y Escalabilidad**  
+   - Implementa **WebDriverWait** para optimizar la carga de elementos sin esperas innecesarias.  
+   - Puede adaptarse fácilmente para extraer información de múltiples productos o diferentes páginas web.  
+
  
 ## Mis recursos
 * Tienda demo para practicar selenium: [saucedemo](https://www.saucedemo.com/)
@@ -60,7 +94,7 @@ source .venv/bin/activate
 python3 main.py
 ```
 
-### Disfruta del resultado
+### 6️⃣ Disfruta del resultado
 
 ![video_demo]()
 
@@ -258,3 +292,38 @@ aqui dejo un resumen de sus distintos módulos:
 | `loc[]`              | Accede a un grupo de filas y columnas por etiquetas o una matriz booleana.                       | `df.loc[filas, columnas]`                                                                         |
 | `iloc[]`             | Accede a un grupo de filas y columnas por índices enteros.                                       | `df.iloc[filas, columnas]`                                                                        |
 
+> [|NOTE]
+> Estos son los pandas que use:
+> 
+> `pd.DataFrame([data])` para conviertir los datos extraídos en un DataFrame.
+>
+> `df.to_csv('productos.csv', index=False, sep=';', encoding='utf-8')` para guardar los datos en un archivo CSV.
+
+6️⃣ Implemente una bateria de test
+
+![test]()
+
+---
+
+## 🤝 Contribución  
+
+¡Las contribuciones son bienvenidas! Para contribuir:  
+
+1. Haz un fork del repositorio.
+   
+3. Crea una nueva rama:
+    
+   ```sh
+   git checkout -b feature/nueva-funcionalidad
+   ```
+   
+4. Realiza tus cambios y haz commit:
+   
+  ```sh
+git commit -m "Añadir nueva funcionalidad"
+```
+
+4. Envía un pull request 🚀.
+   
+---
+## 🚀 ¡Gracias por usar PetGrubber! Si tienes preguntas, crea un issue en el repositorio o contáctanos.
