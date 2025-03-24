@@ -164,4 +164,4 @@ for t in titulos_rating_alto:
     print(t)
 ```
 
-Con esta base implemnte mi primera versión pero me tope con varios inconvenientes que me hicieron elegir usar **Selenium**
+Con esta base implemnte mi primera versión pero me tope con varios inconvenientes que me hicieron elegir usar **Selenium** y el primero fue el manejo de coockies y la pretección para no ser baneado facilmente de las páginas.
