@@ -64,7 +64,7 @@ cd PetGrubber
 ### 2️⃣ Descarga el entorno virtual:
 ⚠️ linux/mac
 ```textplain
-python3.10 -m venv .venvv
+python3.10 -m venv .venv
 ```
 ⚠️ windows
 ```texrplain
